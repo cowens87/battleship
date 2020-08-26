@@ -17,10 +17,18 @@ class Test < Minitest::Test
   end
 
   def test_ship_in_cell
-    cruiser = Ship.new("Cruiser", 3)
     cell = Cell.new("B4")
 
     assert_equal nil, cell.ship
     assert_equal true, cell.empty?
+  end
+
+  def test_place_ship
+    cruiser = Ship.new("Cruiser", 3)
+    cell = Cell.new("B4")
+  
+    cell.place_ship(cruiser)
+    assert_equal cruiser, cell.ship
+    assert_equal false, cell.empty?
   end
 end
