@@ -1,7 +1,8 @@
 class Board
-attr_accessor :cells
+attr_accessor :cells, :coordinates
   def initialize
     @cells = create_cells
+    @coordinates = coordinates
   end
 
   def create_cells
@@ -15,5 +16,13 @@ attr_accessor :cells
 
   def valid_coordinate?(coordinate)
     @cells.has_key?(coordinate)
+  end
+
+  def valid_placement?(ship, coordinate)
+    if coordinate.count == ship.length
+      true
+    else
+      false
+    end
   end
 end
