@@ -19,7 +19,7 @@ class Test < Minitest::Test
   def test_ship_in_cell
     cell = Cell.new("B4")
 
-    assert_equal nil, cell.ship
+    assert_nil cell.ship
     assert_equal true, cell.empty?
   end
 
@@ -46,7 +46,7 @@ class Test < Minitest::Test
     cell_1 = Cell.new("B4")
     cell_2 = Cell.new("C3")
     cruiser = Ship.new("Cruiser", 3)
- 
+
     assert_equal ".", cell_1.render
     #Tests if 'M' returns when fired upon and cell is empty
     cell_1.fire_upon
