@@ -41,4 +41,27 @@ class Test < Minitest::Test
     assert_equal 2, cell.ship.health
     assert_equal true, cell.fired_upon?
   end
+
+  def test_render
+    cell_1 = Cell.new("B4")
+    cell_2 = Cell.new("C3")
+    cruiser = Ship.new("Cruiser", 3)
+ 
+    assert_equal ".", cell_1.render
+    #Tests if 'M' returns when fired upon and cell is empty
+    cell_1.fire_upon
+    assert_equal "M", cell_1.render
+    #Tests if '.' returns when cell is empty //tests if 'S' returns optional arg true
+    cell_2.place_ship(cruiser)
+    assert_equal ".", cell_2.render
+    assert_equal "S", cell_2.render(true)
+    #Tests if 'H' returns when fired upon and cell is NOT empty
+    cell_2.fire_upon
+    assert_equal "H", cell_2.render
+    assert_equal false, cruiser.sunk?
+    #Tests if 'X' returns when fired upon and ship.sunk is true
+    cruiser.hit
+    cruiser.hit
+    assert_equal "X", cell_2.render
+  end
 end
