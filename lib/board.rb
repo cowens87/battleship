@@ -19,7 +19,12 @@ attr_accessor :cells, :coordinates
   end
 
   def valid_placement?(ship, coordinate)
-    same_length?(ship, coordinate) && is_vertical_or_horizontal?(coordinate) && !is_diagonal?(coordinate)
+    coordinate.all? do |coordinate|
+      valid_coordinate?(coordinate)
+    end                                      &&
+      same_length?(ship, coordinate)         &&
+      is_vertical_or_horizontal?(coordinate) &&
+      !is_diagonal?(coordinate)
   end
 
   def same_length?(ship, coordinate)
