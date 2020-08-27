@@ -3,6 +3,7 @@ require 'minitest/pride'
 require './lib/cell'
 require './lib/ship'
 require './lib/board'
+require "pry";
 
 class BoardTest < Minitest::Test
 
@@ -65,6 +66,34 @@ class BoardTest < Minitest::Test
     submarine = Ship.new("Submarine", 2)
 
     assert_equal true, board.valid_placement?(submarine, ["A1", "A2"])
+
     assert_equal true, board.valid_placement?(cruiser, ["B1", "C1", "D1"])
+  end
+
+  def test_cell_has_a_ship
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    cell_1 = board.cells["A1"]
+    cell_2 = board.cells["A2"]
+    cell_3 = board.cells["A3"]
+
+    board.place(cruiser, ["A1", "A2", "A3"])
+
+    assert_equal cruiser, cell_1.ship
+    assert_equal cruiser, cell_2.ship
+    assert_equal cruiser, cell_3.ship
+    assert_equal true, cell_3.ship == cell_2.ship
+  end
+
+  def test_cell_coordinates_not_valid
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    cell_1 = board.cells["E1"]
+    cell_2 = board.cells["E2"]
+    cell_3 = board.cells["E3"]
+
+    board.place(cruiser, ["E1", "E2", "E3"])
+
+    assert_equal false, cell_3.ship == cell_2.ship
   end
 end
