@@ -54,10 +54,17 @@ class BoardTest < Minitest::Test
       board = Board.new
       cruiser = Ship.new("Cruiser", 3)
       submarine = Ship.new("Submarine", 2)
-require "pry"; binding.pry
+
       assert_equal false, board.valid_placement?(cruiser, ["A1", "B2", "C3"])
       assert_equal false, board.valid_placement?(cruiser, ["C2", "D3"])
   end
 
+  def test_valid_placement_can_return_true
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
 
+    assert_equal true, board.valid_placement?(submarine, ["A1", "A2"])
+    assert_equal true, board.valid_placement?(cruiser, ["B1", "C1", "D1"])
+  end
 end
