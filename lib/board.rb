@@ -19,7 +19,8 @@ attr_accessor :cells, :coordinates
   end
 
   def valid_placement?(ship, coordinate)
-    true if same_length?(ship, coordinate) && is_vertical_or_horizontal?(coordinate)
+    if same_length?(ship, coordinate) && is_vertical_or_horizontal?(coordinate)
+      true
     else
       false
     end
@@ -52,3 +53,4 @@ attr_accessor :cells, :coordinates
   def is_vertical_or_horizontal?(coordinate)
     is_horizontal?(coordinate) || is_vertical?(coordinate)
   end
+end
