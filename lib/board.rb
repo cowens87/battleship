@@ -19,12 +19,11 @@ attr_accessor :cells, :coordinates
   end
 
   def valid_placement?(ship, coordinate)
-    coordinate.all? do |coordinate|
-      valid_coordinate?(coordinate)
-    end                                      &&
-      same_length?(ship, coordinate)         &&
-      is_vertical_or_horizontal?(coordinate) &&
-      !is_diagonal?(coordinate)
+    coordinate.all? {|coordinate| valid_coordinate?(coordinate)} &&
+    same_length?(ship, coordinate) &&
+    is_vertical_or_horizontal?(coordinate) &&
+    !is_diagonal?(coordinate) &&
+    is_overlapping?(coordinate)
   end
 
   def same_length?(ship, coordinate)
@@ -55,9 +54,13 @@ attr_accessor :cells, :coordinates
     is_horizontal?(coordinate) && is_vertical?(coordinate)
   end
 
-  def place(ship, coordinates)
-    if valid_placement?(ship, coordinates)
-      coordinates.each do |coordinate|
+  def is_overlapping?(coordinate)
+    coordinate.select.all? {|coordinate| @cells[coordinate].empty?}
+  end
+
+  def place(ship, coordinate)
+    if valid_placement?(ship, coordinate)
+      coordinate.each do |coordinate|
         @cells[coordinate].place_ship(ship)
       end
     end
