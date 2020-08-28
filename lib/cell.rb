@@ -8,11 +8,7 @@ class Cell
   end
 
   def empty?
-    if self.ship == nil
-      true
-    else
-      false
-    end
+    @ship == nil
   end
 
   def place_ship(ship)
@@ -35,7 +31,7 @@ class Cell
       "X"
     elsif fired_upon? && !empty?
       'H'
-    elsif show_ship == true
+    elsif show_ship == true && !empty?
       'S'
     else
       '.'
