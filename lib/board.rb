@@ -86,7 +86,7 @@ attr_accessor :cells, :coordinates
     if show_ship == true
       return render_show_ship_true
     else
-    render_cells
+      render_cells
     end
   end
 end

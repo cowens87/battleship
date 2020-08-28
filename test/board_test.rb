@@ -3,7 +3,6 @@ require 'minitest/pride'
 require './lib/cell'
 require './lib/ship'
 require './lib/board'
-require "pry";
 
 class BoardTest < Minitest::Test
 
@@ -106,7 +105,7 @@ class BoardTest < Minitest::Test
     expected2 = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
 
     board.place(cruiser, ["A1", "A2", "A3"])
-# binding.pry
+
     assert_equal expected1, board.render
     assert_equal expected2, board.render(true)
   end
