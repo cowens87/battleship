@@ -104,9 +104,9 @@ attr_reader :player_board,
   end
 
   def computer_shot
-    #check for random valid coordinate
-    #check if cell has been fired upon
-    #fire_upon that cell
+    shuffled = @player_board.cells.keys.shuffle[5]
+    computer_input = @player_board.cells.fetch(shuffled)
+    computer_input.fire_upon
   end
 
   def results
