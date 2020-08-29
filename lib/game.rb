@@ -92,6 +92,26 @@ attr_reader :player_board,
     @player_board.render(true)
   end
 
+  def result_type_player(coordinate)
+    if @player_board.cells.fired_upon? && @player_board.cells.empty?
+      'was a miss'
+    elsif @player_board.cells.fired_upon? && @player_board.cells.ship.sunk?
+      "sunk the ship"
+    elsif @player_board.cells.fired_upon? && !@player_board.cells.empty?
+      'was a hit'
+    end
+  end
+
+  def result_type_computer(coordinate)
+    if @computer_board.cells.coordinate.fired_upon? && @computer_board.cells.empty?
+      'was a miss'
+    elsif @computer_board.cells.fired_upon? && @computer_board.cells.ship.sunk?
+      "sunk the ship"
+    elsif @computer_board.cells.fired_upon? && !@computer_board.cells.empty?
+      'was a hit'
+    end
+  end
+
   def player_shot
     p 'Enter the coordinate for your shot:'
     user_input = gets.chomp.upcase
@@ -101,19 +121,14 @@ attr_reader :player_board,
     end
      shot_input = @computer_board.cells.fetch(user_input)
      shot_input.fire_upon
-     p "Your shot on #{user_input} was a "
+     p "Your shot on #{user_input} #{shot_input.result_type_computer}"
   end
 
   def computer_shot
     shuffled = @player_board.cells.keys.shuffle[5]
     computer_input = @player_board.cells.fetch(shuffled)
     computer_input.fire_upon
-    p "My shot on #{computer_input} was a "
-  end
-
-  def result_type
-    #if statement - possibly use render in cell class
-    #handle shot missed // shot hit a ship // shot sunk a ship
+    p "My shot on #{computer_input} #{result_type_player(computer_input)}"
   end
 
   # def already_fired_upon?#(coordinate)
