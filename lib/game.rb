@@ -12,8 +12,8 @@ attr_reader :player_board,
     @computer_board = Board.new
     @computer_cruiser = Ship.new("Cruiser", 3)
     @computer_submarine = Ship.new("Submarine", 2)
-    computer_placement
-    player_ship_placement
+    # computer_placement
+    # player_ship_placement
   end
 
   def welcome_message
@@ -89,18 +89,18 @@ attr_reader :player_board,
     p "=============COMPUTER BOARD============="
     @computer_board.render
     p "==============PLAYER BOARD=============="
-    @player_board.render
+    @player_board.render(true)
   end
 
   def player_shot
     p 'Enter the coordinate for your shot:'
-    p '>'
-    #prompt player enters coordinate
-    #check if coordinate is valid + already_fired_upon?
-    #if invalid
+    user_input = gets.chomp.upcase
+    until @computer_board.valid_coordinate?(user_input)
     p 'Please enter a valid coordinate:'
-    #prompt player to enter new coordinate
-    #else fire_upon that cell
+      user_input = gets.chomp.upcase
+    end
+     shot_input = @computer_board.cells.fetch(user_input)
+     shot_input.fire_upon
   end
 
   def computer_shot
@@ -118,10 +118,11 @@ attr_reader :player_board,
     #handle shot missed // shot hit a ship // shot sunk a ship
   end
 
-  def already_fired_upon?
-    #check if player already fired upon a cell
-    #if so, prompt for a new coordinate
-  end
+  # def already_fired_upon?#(coordinate)
+  #   @computer_board.cells.map do |cell|
+  #     cell.fired_upon? == true
+  #   end
+  # end
 
   def end_game_message
     #if all computer ships sunk
