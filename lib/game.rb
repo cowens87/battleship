@@ -37,8 +37,14 @@ attr_reader :player_board,
 
 #-----------SETUP
   def computer_placement
+    #cruiser pulls 3 cells
+    random_coordinates = []
     @computer_board.each do |cell|
-      valid_placement?
+      cells.sample
+    #place_random
+    #place
+    #place_random
+    #place
     #find cells which are valid for ship type1
     #place Ship
     #do that again for ship type2
@@ -47,8 +53,18 @@ attr_reader :player_board,
 
   #check board if valid placement ship/coordinates
 
-  def place_random(ship, coordinates)
-    #picks out coordinates randomly
+  def random_coordinates_cruiser
+    random_coordinates = []
+    3.times do random_coordinates << game.computer_board.cells.keys.sample
+    end
+    random_coordinates
+  end
+
+  def random_coordinates_submarine
+    random_coordinates = []
+    2.times do random_coordinates << game.computer_board.cells.keys.sample
+    end
+    random_coordinates
   end
 
   def player_ship_placement
