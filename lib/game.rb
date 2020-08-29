@@ -94,7 +94,9 @@ attr_reader :player_board,
 
   def result_type_player(cell)
     result_type = ''
-    if cell.render == 'M'
+    if already_fired_upon?(cell)
+      result_type = 'has already been attempted. Please try again.'
+    elsif cell.render == 'M'
       result_type = 'was a miss'
     elsif cell.render == 'X'
       result_type = "sunk the ship"
@@ -135,11 +137,9 @@ attr_reader :player_board,
     result_type_computer(computer_input)
   end
 
-  # def already_fired_upon?#(coordinate)
-  #   @computer_board.cells.map do |cell|
-  #     cell.fired_upon? == true
-  #   end
-  # end
+  def already_fired_upon?(cell)
+    cell.shot_count > 1
+  end
 
   def end_game_message
     #if all computer ships sunk
