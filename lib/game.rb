@@ -92,24 +92,28 @@ attr_reader :player_board,
     @player_board.render(true)
   end
 
-  def result_type_player(coordinate)
-    if @player_board.cells.fired_upon? && @player_board.cells.empty?
-      'was a miss'
-    elsif @player_board.cells.fired_upon? && @player_board.cells.ship.sunk?
-      "sunk the ship"
-    elsif @player_board.cells.fired_upon? && !@player_board.cells.empty?
-      'was a hit'
+  def result_type_player(cell)
+    result_type = ''
+    if cell.render == 'M'
+      result_type = 'was a miss'
+    elsif cell.render == 'X'
+      result_type = "sunk the ship"
+    elsif cell.render == 'H'
+      result_type = 'was a hit'
     end
+    p "Your shot on #{cell} #{result_type}"
   end
 
-  def result_type_computer(coordinate)
-    if @computer_board.cells.coordinate.fired_upon? && @computer_board.cells.empty?
-      'was a miss'
-    elsif @computer_board.cells.fired_upon? && @computer_board.cells.ship.sunk?
-      "sunk the ship"
-    elsif @computer_board.cells.fired_upon? && !@computer_board.cells.empty?
-      'was a hit'
+  def result_type_computer(cell)
+    result_type = ''
+    if cell.render == 'M'
+      result_type = 'was a miss'
+    elsif cell.render == 'X'
+      result_type = "sunk the ship"
+    elsif cell.render == 'H'
+      result_type = 'was a hit'
     end
+    p "My shot on #{cell} #{result_type}"
   end
 
   def player_shot
@@ -121,14 +125,14 @@ attr_reader :player_board,
     end
      shot_input = @computer_board.cells.fetch(user_input)
      shot_input.fire_upon
-     p "Your shot on #{user_input} #{shot_input.result_type_computer}"
+     result_type_player(shot_input)
   end
 
   def computer_shot
     shuffled = @player_board.cells.keys.shuffle[5]
     computer_input = @player_board.cells.fetch(shuffled)
     computer_input.fire_upon
-    p "My shot on #{computer_input} #{result_type_player(computer_input)}"
+    result_type_computer(computer_input)
   end
 
   # def already_fired_upon?#(coordinate)

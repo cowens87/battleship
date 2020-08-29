@@ -24,7 +24,7 @@ class GameTest < Minitest::Test
 
   def test_game_has_boards_and_players
     game = Game.new
-    require "pry"; binding.pry
+
     assert_instance_of  Board, game.player_board
     assert_instance_of  Ship, game.player_cruiser
     assert_instance_of  Ship, game.player_submarine
