@@ -13,6 +13,7 @@ attr_reader :player_board,
     @computer_cruiser = Ship.new("Cruiser", 3)
     @computer_submarine = Ship.new("Submarine", 2)
     computer_placement
+    player_ship_placement
   end
 
   def welcome_message
@@ -61,22 +62,26 @@ attr_reader :player_board,
     p 'I have laid out my ships on the grid.'
     p 'You now need to lay out your two ships.'
     p 'The Cruiser is three units long and the Submarine is two units long.'
-    @player_board.render
-    p 'Enter the squares for the Cruiser (3 spaces):'
-    #ask player for coordinates
-    #place ship unless invalid coordinates
-    #if invalid -
-    p 'Those are invalid coordinates. Please try again:'
-    #if valid -
-    @player_board.render
-    p "Enter the squares for the Submarine (2 spaces):"
-    #ask player for coordinates
-    #place ship unless invalid coordinates
-    #if invalid -
-    p 'Those are invalid coordinates. Please try again:'
+    puts @player_board.render
+
+    p 'Enter the squares, without commas, for the Cruiser (3 spaces):'
+    user_input = gets.chomp.upcase.split(" ")
+      until @player_board.valid_placement?(@player_cruiser, user_input)
+        p 'Those are invalid coordinates. Please try again:'
+        user_input = gets.chomp.upcase.split(" ")
+      end
+      @player_board.place(@player_cruiser, user_input)
+    puts @player_board.render(true)
+
+    p 'Enter the squares, without commas, for the Submarine (2 spaces):'
+    user_input = gets.chomp.upcase.split(" ")
+        until @player_board.valid_placement?(@player_submarine, user_input)
+          p 'Those are invalid coordinates. Please try again:'
+          user_input = gets.chomp.upcase.split(" ")
+        end
+      @player_board.place(@player_submarine, user_input)
+    puts @player_board.render(true)
   end
-
-
 
 #-----------TURN
 
