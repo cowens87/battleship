@@ -101,16 +101,14 @@ attr_reader :player_board,
     end
      shot_input = @computer_board.cells.fetch(user_input)
      shot_input.fire_upon
+     p "Your shot on #{user_input} was a "
   end
 
   def computer_shot
     shuffled = @player_board.cells.keys.shuffle[5]
     computer_input = @player_board.cells.fetch(shuffled)
     computer_input.fire_upon
-  end
-
-  def results
-  #p "Your shot on #{player shot} was a #{type of hit}"
+    p "My shot on #{computer_input} was a "
   end
 
   def result_type
