@@ -51,20 +51,26 @@ attr_reader :player_board,
     end
   end
 
-  #check board if valid placement ship/coordinates
-
   def random_coordinates_cruiser
     random_coordinates = []
-    3.times do random_coordinates << game.computer_board.cells.keys.sample
+    3.times do random_coordinates << @computer_board.cells.keys.sample
     end
-    random_coordinates
+    if @computer_board.valid_placement?(@computer_cruiser, random_coordinates)
+      @computer_board.place(@computer_cruiser, random_coordinates)
+    else
+      random_coordinates_cruiser
+    end
   end
 
   def random_coordinates_submarine
     random_coordinates = []
-    2.times do random_coordinates << game.computer_board.cells.keys.sample
+    2.times do random_coordinates << @computer_board.cells.keys.sample
     end
     random_coordinates
+  end
+
+  def random_coordinates_valid?
+    random_coordinates_cruiser
   end
 
   def player_ship_placement

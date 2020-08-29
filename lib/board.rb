@@ -31,12 +31,12 @@ attr_accessor :cells, :coordinates
   end
 
   def is_horizontal?(coordinate)
-     letters = coordinate.map do |letter|
+    letters = coordinate.map do |letter|
         letter[0]
       end
      range = letters[0]..letters[-1]
      letters == range.to_a
-  end
+   end
 
   def is_vertical?(coordinate)
     numbers = coordinate.map do |number|
@@ -46,8 +46,26 @@ attr_accessor :cells, :coordinates
     numbers == range.to_a
   end
 
+  def letters_same?(coordinate)
+    letters = coordinate.map do |letter|
+        letter[0]
+      end
+      letters.map do |letter|
+        letter == letter[0]
+      end
+  end
+
+  def numbers_same?(coordinate)
+    numbers = coordinate.map do |number|
+        number[-1]
+      end
+      numbers.map do |number|
+        number == number[-1]
+      end
+  end
+
   def is_vertical_or_horizontal?(coordinate)
-    is_horizontal?(coordinate) || is_vertical?(coordinate)
+    is_horizontal?(coordinate) && numbers_same?(coordinate)|| is_vertical?(coordinate) && letters_same?(coordinate)
   end
 
   def is_diagonal?(coordinate)
