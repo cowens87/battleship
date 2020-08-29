@@ -1,5 +1,10 @@
 class Game
-
+attr_reader :player_board,
+            :player_cruiser,
+            :player_submarine,
+            :computer_board,
+            :computer_cruiser,
+            :computer_submarine
   def initialize
     @player_board = Board.new
     @player_cruiser = Ship.new("Cruiser", 3)
@@ -26,7 +31,7 @@ class Game
   def run
     #actually run the turn
     #computer_placement
-    #player_ship 
+    #player_ship
     #... etc., run through the turn with methods below
   end
 
@@ -37,7 +42,7 @@ class Game
     #find cells which are valid for ship type1
     #place Ship
     #do that again for ship type2
-  end
+    end
   end
 
   #check board if valid placement ship/coordinates

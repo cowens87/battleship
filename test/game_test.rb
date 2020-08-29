@@ -22,4 +22,14 @@ class GameTest < Minitest::Test
     assert_equal expected, game.welcome_message
   end
 
+  def test_game_has_boards_and_players
+    game = Game.new
+
+    assert_instance_of  Board, game.player_board
+    assert_instance_of  Ship, game.player_cruiser
+    assert_instance_of  Ship, game.player_submarine
+    assert_instance_of  Board, game.computer_board
+    assert_instance_of  Ship, game.computer_cruiser
+    assert_instance_of  Ship, game.computer_submarine
+  end
 end
