@@ -12,6 +12,7 @@ attr_reader :player_board,
     @computer_board = Board.new
     @computer_cruiser = Ship.new("Cruiser", 3)
     @computer_submarine = Ship.new("Submarine", 2)
+    computer_placement
   end
 
   def welcome_message
@@ -28,27 +29,10 @@ attr_reader :player_board,
     end
   end
 
-  def run
-    #actually run the turn
-    #computer_placement
-    #player_ship
-    #... etc., run through the turn with methods below
-  end
-
 #-----------SETUP
   def computer_placement
-    #cruiser pulls 3 cells
-    random_coordinates = []
-    @computer_board.each do |cell|
-      cells.sample
-    #place_random
-    #place
-    #place_random
-    #place
-    #find cells which are valid for ship type1
-    #place Ship
-    #do that again for ship type2
-    end
+    random_coordinates_cruiser
+    random_coordinates_submarine
   end
 
   def random_coordinates_cruiser
@@ -66,11 +50,11 @@ attr_reader :player_board,
     random_coordinates = []
     2.times do random_coordinates << @computer_board.cells.keys.sample
     end
-    random_coordinates
-  end
-
-  def random_coordinates_valid?
-    random_coordinates_cruiser
+    if @computer_board.valid_placement?(@computer_submarine, random_coordinates)
+      @computer_board.place(@computer_submarine, random_coordinates)
+    else
+    random_coordinates_submarine
+    end
   end
 
   def player_ship_placement
