@@ -9,7 +9,7 @@ class GameTest < Minitest::Test
 
   def test_it_exists
     game = Game.new
-require "pry"; binding.pry
+
     assert_instance_of Game, game
   end
 
