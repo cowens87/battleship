@@ -12,22 +12,32 @@ attr_reader :player_board,
     @computer_board = Board.new
     @computer_cruiser = Ship.new("Cruiser", 3)
     @computer_submarine = Ship.new("Submarine", 2)
-    # computer_placement
-    # player_ship_placement
+    start
   end
 
   def welcome_message
-    "Welcome to BATTLESHIP" +
+    "Welcome to BATTLESHIP " +
     "Enter p to play. Enter q to quit"
   end
 
   def start
-    welcome_message
+    p welcome_message
     if gets.chomp.downcase == 'p'
       run
     else
       p 'See you next time!'
     end
+  end
+
+  def run
+    computer_placement
+    player_ship_placement
+    until game_over? do
+      display_board
+      player_shot
+      computer_shot
+    end
+    player_won_game_message || computer_won_game_message
   end
 
 #-----------SETUP
@@ -87,9 +97,9 @@ attr_reader :player_board,
 
   def display_board
     p "=============COMPUTER BOARD============="
-    @computer_board.render
+    p @computer_board.render
     p "==============PLAYER BOARD=============="
-    @player_board.render(true)
+    p @player_board.render(true)
   end
 
   def result_type_player(cell)
@@ -159,7 +169,7 @@ attr_reader :player_board,
     computer_cruiser.sunk? && computer_submarine.sunk?
     end
 
-  def is_game_over?
+  def game_over?
     player_ships_sunk? || computer_ships_sunk?
   end
 end
