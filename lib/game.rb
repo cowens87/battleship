@@ -12,16 +12,16 @@ attr_reader :player_board,
     @computer_board = Board.new
     @computer_cruiser = Ship.new("Cruiser", 3)
     @computer_submarine = Ship.new("Submarine", 2)
-    # start
+    start
   end
 
   def welcome_message
-    "Welcome to BATTLESHIP " +
+    "Welcome to BATTLESHIP \n" +
     "Enter p to play. Enter q to quit"
   end
 
   def start
-    p welcome_message
+    puts welcome_message
     if gets.chomp.downcase == 'p'
       run
     else
@@ -47,25 +47,19 @@ attr_reader :player_board,
   end
 
   def random_coordinates_cruiser
-    random_coordinates = []
-    3.times do random_coordinates << @computer_board.cells.keys.sample
-    end
-    if @computer_board.valid_placement?(@computer_cruiser, random_coordinates)
-      @computer_board.place(@computer_cruiser, random_coordinates)
-    else
-      random_coordinates_cruiser
-    end
+    random_coordinates = @computer_board.cells.keys.sample(3)
+      until @computer_board.valid_placement?(@computer_cruiser, random_coordinates)
+        random_coordinates = @computer_board.cells.keys.sample(3)
+      end
+    @computer_board.place(@computer_cruiser, random_coordinates)
   end
 
   def random_coordinates_submarine
-    random_coordinates = []
-    2.times do random_coordinates << @computer_board.cells.keys.sample
-    end
-    if @computer_board.valid_placement?(@computer_submarine, random_coordinates)
-      @computer_board.place(@computer_submarine, random_coordinates)
-    else
-    random_coordinates_submarine
-    end
+    random_coordinates = @computer_board.cells.keys.sample(2)
+      until @computer_board.valid_placement?(@computer_submarine, random_coordinates)
+        random_coordinates = @computer_board.cells.keys.sample(2)
+      end
+    @computer_board.place(@computer_submarine, random_coordinates)
   end
 
   def player_ship_placement
@@ -97,9 +91,9 @@ attr_reader :player_board,
 
   def display_board
     p "=============COMPUTER BOARD============="
-    p @computer_board.render(true)
+    puts @computer_board.render(true)
     p "==============PLAYER BOARD=============="
-    p @player_board.render(true)
+    puts @player_board.render(true)
   end
 
   def result_type_player(cell)

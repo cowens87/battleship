@@ -50,18 +50,14 @@ attr_accessor :cells, :coordinates
     letters = coordinate.map do |letter|
         letter[0]
       end
-      letters.map do |letter|
-        letter == letter[0]
-      end
+    letters.uniq.length == 1
   end
 
   def numbers_same?(coordinate)
     numbers = coordinate.map do |number|
         number[-1]
       end
-      numbers.map do |number|
-        number == number[-1]
-      end
+    numbers.uniq.length == 1
   end
 
   def is_vertical_or_horizontal?(coordinate)
