@@ -1,10 +1,12 @@
 class Cell
   attr_reader :coordinate, :ship, :fire_upon
+  attr_accessor :shot_count
 
   def initialize(coordinate)
     @coordinate = coordinate
     @ship = ship
     @fired_upon = false
+    @shot_count = 0
   end
 
   def empty?
@@ -22,6 +24,7 @@ class Cell
   def fire_upon
     @ship.hit if !empty?
     @fired_upon = true
+    @shot_count += 1
   end
 
   def render(show_ship = nil)
