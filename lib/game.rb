@@ -141,14 +141,25 @@ attr_reader :player_board,
     cell.shot_count > 1
   end
 
-  def end_game_message
-    #if all computer ships sunk
+  def player_won_game_message
+    computer_ships_sunk?
     p 'You won!'
-    #if all player ships sunk
+  end
+
+  def computer_won_game_message
+    player_ships_sunk?
     p 'I won!'
   end
 
+  def player_ships_sunk?
+    player_cruiser.sunk? && player_submarine.sunk?
+  end
+
+  def computer_ships_sunk?
+    computer_cruiser.sunk? && computer_submarine.sunk?
+    end
+
   def is_game_over?
-    #have all? player ships || computer ships sunk?
+    player_ships_sunk? || computer_ships_sunk?
   end
 end
