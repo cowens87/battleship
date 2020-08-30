@@ -12,7 +12,7 @@ attr_reader :player_board,
     @computer_board = Board.new
     @computer_cruiser = Ship.new("Cruiser", 3)
     @computer_submarine = Ship.new("Submarine", 2)
-    start
+    # start
   end
 
   def welcome_message
@@ -97,7 +97,7 @@ attr_reader :player_board,
 
   def display_board
     p "=============COMPUTER BOARD============="
-    p @computer_board.render
+    p @computer_board.render(true)
     p "==============PLAYER BOARD=============="
     p @player_board.render(true)
   end
@@ -162,12 +162,12 @@ attr_reader :player_board,
   end
 
   def player_ships_sunk?
-    player_cruiser.sunk? && player_submarine.sunk?
+    @player_cruiser.sunk? && @player_submarine.sunk?
   end
 
   def computer_ships_sunk?
-    computer_cruiser.sunk? && computer_submarine.sunk?
-    end
+    @computer_cruiser.sunk? && @computer_submarine.sunk?
+  end
 
   def game_over?
     player_ships_sunk? || computer_ships_sunk?

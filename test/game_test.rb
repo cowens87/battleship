@@ -33,5 +33,12 @@ class GameTest < Minitest::Test
     assert_instance_of  Ship, game.computer_submarine
   end
 
+  def test_random_coordinates_valid?
+    game = Game.new
+    expected = game.player_board.cells.keys.shuffle[5]
+  require 'pry'; binding.pry
+    assert_equal expected.count, (game.player_board.cells.keys.shuffle[5]).count
+  end
+
 
 end
