@@ -12,6 +12,6 @@ attr_reader :name, :length, :health
   end
 
   def hit
-    @health - 1
+    @health -= 1
   end
 end
