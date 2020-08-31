@@ -107,7 +107,7 @@ attr_reader :player_board,
     elsif cell.render == 'H'
       result_type = 'was a hit'
     end
-    p "Your shot on #{cell} #{result_type}"
+    p "Your shot on #{cell.coordinate} #{result_type}"
   end
 
   def result_type_computer(cell)
@@ -119,7 +119,7 @@ attr_reader :player_board,
     elsif cell.render == 'H'
       result_type = 'was a hit'
     end
-    p "My shot on #{cell} #{result_type}"
+    p "My shot on #{cell.coordinate} #{result_type}"
   end
 
   def player_shot
