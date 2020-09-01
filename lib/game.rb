@@ -98,14 +98,14 @@ attr_reader :player_board,
 
   def result_type_player(cell)
     result_type = ''
-    if already_fired_upon?(cell)
-      result_type = 'has already been attempted. Please try again.'
-    elsif cell.render == 'M'
+    if cell.render == 'M'
       result_type = 'was a miss'
     elsif cell.render == 'X'
       result_type = "sunk the ship"
     elsif cell.render == 'H'
       result_type = 'was a hit'
+    else
+      'was an invalid coordinate. Please try again.'
     end
     p "Your shot on #{cell.coordinate} #{result_type}"
   end
@@ -126,23 +126,24 @@ attr_reader :player_board,
     p 'Enter the coordinate for your shot:'
     user_input = gets.chomp.upcase
     until @computer_board.valid_coordinate?(user_input)
-    p 'Please enter a valid coordinate:'
+      p 'Please enter a valid coordinate:'
       user_input = gets.chomp.upcase
     end
-     shot_input = @computer_board.cells.fetch(user_input)
-     shot_input.fire_upon
-     result_type_player(shot_input)
+    @computer_board.cells[user_input].fire_upon
+    result_type_player(@computer_board.cells[user_input])
   end
 
   def computer_shot
     shuffled = @player_board.cells.keys.shuffle[5]
-    computer_input = @player_board.cells.fetch(shuffled)
-    computer_input.fire_upon
-    result_type_computer(computer_input)
+    until @player_board.valid_coordinate?(shuffled)
+      shuffled = @player_board.cells.keys.shuffle[5]
+    end
+    @player_board.cells[shuffled].fire_upon
+    result_type_computer(@player_board.cells[shuffled])
   end
 
   def already_fired_upon?(cell)
-    cell.shot_count > 1
+    cell.fired_upon?
   end
 
   def player_won_game_message
