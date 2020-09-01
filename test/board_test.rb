@@ -136,4 +136,16 @@ class BoardTest < Minitest::Test
 
     assert_equal expected1, board.render(true)
   end
+
+  def test_it_can_render_a_miss_a_ship
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    expected1 = "  1 2 3 4 \nA S S S M \nB . . . . \nC . . . . \nD . . . . \n"
+
+    board.place(cruiser, ["A1", "A2", "A3"])
+
+    board.cells["A4"].fire_upon
+
+    assert_equal expected1, board.render(true)
+  end
 end
