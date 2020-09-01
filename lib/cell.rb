@@ -32,7 +32,7 @@ class Cell
       'M'
     elsif fired_upon? && @ship.sunk?
       "X"
-    elsif fired_upon? && !empty?
+    elsif fired_upon? && !empty? && !@ship.sunk?
       'H'
     elsif show_ship == true && !empty?
       'S'
