@@ -39,6 +39,7 @@ class Test < Minitest::Test
     cell.place_ship(cruiser)
     cell.fire_upon
     assert_equal 2, cell.ship.health
+    assert_equal 1, cell.shot_count
     assert_equal true, cell.fired_upon?
   end
 
