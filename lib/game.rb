@@ -85,7 +85,6 @@ attr_reader :player_board,
           user_input = gets.chomp.upcase.split(" ")
         end
       @player_board.place(@player_submarine, user_input)
-    puts @player_board.render(true)
   end
 
 #-----------TURN
