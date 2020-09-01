@@ -92,7 +92,7 @@ attr_reader :player_board,
 
   def display_board
     p "=============COMPUTER BOARD============="
-    puts @computer_board.render(true)
+    puts @computer_board.render
     p "==============PLAYER BOARD=============="
     puts @player_board.render(true)
   end
