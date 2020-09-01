@@ -25,7 +25,7 @@ attr_reader :player_board,
     if gets.chomp.downcase == 'p'
       run
     else
-      p 'See you next time!'
+      puts 'See you next time!'
       exit
     end
   end
@@ -64,24 +64,24 @@ attr_reader :player_board,
   end
 
   def player_ship_placement
-    p 'I have laid out my ships on the grid.'
-    p 'You now need to lay out your two ships.'
-    p 'The Cruiser is three units long and the Submarine is two units long.'
+    puts 'I have laid out my ships on the grid.'
+    puts 'You now need to lay out your two ships.'
+    puts 'The Cruiser is three units long and the Submarine is two units long.'
     puts @player_board.render
 
-    p 'Enter the squares, without commas, for the Cruiser (3 spaces):'
+    puts 'Enter the squares, without commas, for the Cruiser (3 spaces):'
     user_input = gets.chomp.upcase.split(" ")
       until @player_board.valid_placement?(@player_cruiser, user_input)
-        p 'Those are invalid coordinates. Please try again:'
+        puts 'Those are invalid coordinates. Please try again:'
         user_input = gets.chomp.upcase.split(" ")
       end
       @player_board.place(@player_cruiser, user_input)
     puts @player_board.render(true)
 
-    p 'Enter the squares, without commas, for the Submarine (2 spaces):'
+    puts 'Enter the squares, without commas, for the Submarine (2 spaces):'
     user_input = gets.chomp.upcase.split(" ")
         until @player_board.valid_placement?(@player_submarine, user_input)
-          p 'Those are invalid coordinates. Please try again:'
+          puts 'Those are invalid coordinates. Please try again:'
           user_input = gets.chomp.upcase.split(" ")
         end
       @player_board.place(@player_submarine, user_input)
@@ -90,9 +90,9 @@ attr_reader :player_board,
 #-----------TURN
 
   def display_board
-    p "=============COMPUTER BOARD============="
+    puts "=============COMPUTER BOARD============="
     puts @computer_board.render
-    p "==============PLAYER BOARD=============="
+    puts "==============PLAYER BOARD=============="
     puts @player_board.render(true)
   end
 
@@ -107,7 +107,7 @@ attr_reader :player_board,
     else
       'was an invalid coordinate. Please try again.'
     end
-    p "Your shot on #{cell.coordinate} #{result_type}"
+    puts "Your shot on #{cell.coordinate} #{result_type}"
   end
 
   def result_type_computer(cell)
@@ -119,14 +119,14 @@ attr_reader :player_board,
     elsif cell.render == 'H'
       result_type = 'was a hit'
     end
-    p "My shot on #{cell.coordinate} #{result_type}"
+    puts "My shot on #{cell.coordinate} #{result_type}"
   end
 
   def player_shot
-    p 'Enter the coordinate for your shot:'
+    puts 'Enter the coordinate for your shot:'
     user_input = gets.chomp.upcase
     until @computer_board.valid_coordinate?(user_input)
-      p 'Please enter a valid coordinate:'
+      puts 'Please enter a valid coordinate:'
       user_input = gets.chomp.upcase
     end
     @computer_board.cells[user_input].fire_upon
@@ -148,12 +148,12 @@ attr_reader :player_board,
 
   def player_won_game_message
     computer_ships_sunk?
-    p 'You won!'
+    puts 'You won!'
   end
 
   def computer_won_game_message
     player_ships_sunk?
-    p 'I won!'
+    puts 'I won!'
   end
 
   def player_ships_sunk?
