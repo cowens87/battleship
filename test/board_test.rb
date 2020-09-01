@@ -98,6 +98,34 @@ class BoardTest < Minitest::Test
     assert board.valid_placement?(submarine, ["B1", "B2"])
   end
 
+  def test_coordinates_has_same_letters
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+    cell_1 = board.cells["A1"]
+    cell_2 = board.cells["A2"]
+    cell_3 = board.cells["A3"]
+
+    board.place(cruiser, ["A1", "A2", "A3"])
+
+    assert_equal true, board.letters_same?(["A1", "A2"])
+    assert_equal false, board.letters_same?(["A1", "B1"])
+  end
+
+  def test_coordinates_has_same_number
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+    cell_1 = board.cells["A1"]
+    cell_2 = board.cells["A2"]
+    cell_3 = board.cells["A3"]
+
+    board.place(cruiser, ["A1", "A2", "A3"])
+
+    assert_equal true, board.numbers_same?(["A1", "B1"])
+    assert_equal false, board.numbers_same?(["B1", "B2"])
+  end
+
   def test_it_can_render_a_board
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
