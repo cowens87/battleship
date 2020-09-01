@@ -38,7 +38,11 @@ attr_reader :player_board,
       player_shot
       computer_shot
     end
-    player_won_game_message || computer_won_game_message
+    if player_ships_sunk?
+      computer_won_game_message
+    else
+      player_won_game_message
+    end
   end
 
 #-----------SETUP
