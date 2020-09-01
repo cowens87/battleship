@@ -1,6 +1,6 @@
 class Cell
-  attr_reader :coordinate, :ship, :fire_upon
-  attr_accessor :shot_count
+  attr_reader :coordinate, :ship
+  attr_accessor :shot_count, :fire_upon
 
   def initialize(coordinate)
     @coordinate = coordinate
@@ -32,7 +32,7 @@ class Cell
       'M'
     elsif fired_upon? && @ship.sunk?
       "X"
-    elsif fired_upon? && !empty?
+    elsif fired_upon? && !empty? && !@ship.sunk?
       'H'
     elsif show_ship == true && !empty?
       'S'

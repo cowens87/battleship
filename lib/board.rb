@@ -15,7 +15,7 @@ attr_accessor :cells, :coordinates
   end
 
   def valid_coordinate?(coordinate)
-    @cells.has_key?(coordinate)
+    @cells.has_key?(coordinate) && !@cells[coordinate].fired_upon?
   end
 
   def valid_placement?(ship, coordinate)
