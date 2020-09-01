@@ -26,6 +26,7 @@ attr_reader :player_board,
       run
     else
       p 'See you next time!'
+      exit
     end
   end
 
