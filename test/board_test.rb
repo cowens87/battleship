@@ -109,4 +109,31 @@ class BoardTest < Minitest::Test
     assert_equal expected1, board.render
     assert_equal expected2, board.render(true)
   end
+
+  def test_it_can_render_hits_on_a_board
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    expected1 = "  1 2 3 4 \nA S H H . \nB . . . . \nC . . . . \nD . . . . \n"
+
+    board.place(cruiser, ["A1", "A2", "A3"])
+
+    board.cells["A3"].fire_upon
+    board.cells["A2"].fire_upon
+
+    assert_equal expected1, board.render(true)
+  end
+
+  def test_it_can_render_a_sunk_ship
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    expected1 = "  1 2 3 4 \nA X X X . \nB . . . . \nC . . . . \nD . . . . \n"
+
+    board.place(cruiser, ["A1", "A2", "A3"])
+
+    board.cells["A3"].fire_upon
+    board.cells["A2"].fire_upon
+    board.cells["A1"].fire_upon
+
+    assert_equal expected1, board.render(true)
+  end
 end
