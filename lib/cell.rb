@@ -4,7 +4,6 @@ class Cell
 
   attr_accessor :shot_count,
                 :fire_upon
-
   def initialize(coordinate)
     @coordinate = coordinate
     @ship = ship
