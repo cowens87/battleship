@@ -12,7 +12,7 @@ attr_reader :player_board,
     @computer_board = Board.new
     @computer_cruiser = Ship.new("Cruiser", 3)
     @computer_submarine = Ship.new("Submarine", 2)
-    start
+    # start
   end
 
   def welcome_message
@@ -144,10 +144,6 @@ attr_reader :player_board,
     end
     @player_board.cells[shuffled].fire_upon
     result_type_computer(@player_board.cells[shuffled])
-  end
-
-  def already_fired_upon?(cell)
-    cell.fired_upon?
   end
 
   def player_won_game_message
