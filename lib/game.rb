@@ -12,7 +12,7 @@ attr_reader :player_board,
     @computer_board = Board.new
     @computer_cruiser = Ship.new("Cruiser", 3)
     @computer_submarine = Ship.new("Submarine", 2)
-    # start
+    start
   end
 
   def welcome_message
@@ -38,6 +38,10 @@ attr_reader :player_board,
       player_shot
       computer_shot
     end
+    end_game_message
+  end
+
+  def end_game_message
     if player_ships_sunk?
       computer_won_game_message
     else
