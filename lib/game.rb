@@ -41,6 +41,7 @@ class Game
       computer_shot
     end
     end_game_message
+    self.start
   end
 
   def end_game_message
@@ -174,11 +175,13 @@ class Game
   def player_won_game_message
     computer_ships_sunk?
     puts 'You won!'
+    puts "========================================"
   end
 
   def computer_won_game_message
     player_ships_sunk?
     puts 'I won!'
+    puts "========================================"
   end
 
   def player_ships_sunk?
