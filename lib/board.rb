@@ -1,5 +1,6 @@
 class Board
-attr_accessor :cells, :coordinates
+  attr_accessor :cells,
+                :coordinates
   def initialize
     @cells = create_cells
     @coordinates = coordinates
@@ -32,31 +33,31 @@ attr_accessor :cells, :coordinates
 
   def is_horizontal?(coordinate)
     letters = coordinate.map do |letter|
-        letter[0]
-      end
+                letter[0]
+              end
      range = letters[0]..letters[-1]
      letters == range.to_a
    end
 
   def is_vertical?(coordinate)
     numbers = coordinate.map do |number|
-      number[-1]
-    end
+                number[-1]
+              end
     range = numbers[0]..numbers[-1]
     numbers == range.to_a
   end
 
   def letters_same?(coordinate)
     letters = coordinate.map do |letter|
-        letter[0]
-      end
+                letter[0]
+              end
     letters.uniq.length == 1
   end
 
   def numbers_same?(coordinate)
     numbers = coordinate.map do |number|
-        number[-1]
-      end
+                number[-1]
+              end
     numbers.uniq.length == 1
   end
 

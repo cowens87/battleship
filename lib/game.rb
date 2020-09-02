@@ -52,6 +52,7 @@ class Game
   end
 
 #-----------SETUP
+
   def computer_placement
     random_coordinates_cruiser
     random_coordinates_submarine
