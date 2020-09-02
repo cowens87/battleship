@@ -24,15 +24,16 @@ class Game
 
   def start
     puts welcome_message
-    if user_input = gets.chomp.downcase == 'p'
+    user_input = gets.chomp.downcase
+    if user_input == 'p'
       run
     elsif user_input == 'q'
       puts 'See you next time!'
       exit
     else
       puts "I don't know what that is. Please enter p or q"
-      puts "========================================"
-      self.start 
+      puts "\n┐(￣∀￣)┌\n\n" +"========================================"
+      self.start
     end
   end
 
