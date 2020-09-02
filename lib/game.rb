@@ -156,8 +156,13 @@ class Game
     puts 'Enter the coordinate for your shot:'
     user_input = gets.chomp.upcase
     until @computer_board.valid_coordinate?(user_input)
-      puts 'Please enter a valid coordinate:'
-      user_input = gets.chomp.upcase
+      if @computer_board.cells[user_input].fired_upon?
+        puts "You have already fired upon #{user_input.upcase}. Please try again:"
+        user_input = gets.chomp.upcase
+      else
+        puts 'Please enter a valid coordinate:'
+        user_input = gets.chomp.upcase
+      end
     end
     @computer_board.cells[user_input].fire_upon
     result_type_player(@computer_board.cells[user_input])
