@@ -1,10 +1,13 @@
 class Game
-attr_reader :player_board,
-            :player_cruiser,
-            :player_submarine,
-            :computer_board,
-            :computer_cruiser,
-            :computer_submarine
+  require './lib/board.rb'
+  require './lib/cell.rb'
+  require './lib/ship.rb'
+  attr_reader :player_board,
+              :player_cruiser,
+              :player_submarine,
+              :computer_board,
+              :computer_cruiser,
+              :computer_submarine
   def initialize
     @player_board = Board.new
     @player_cruiser = Ship.new("Cruiser", 3)
@@ -12,7 +15,6 @@ attr_reader :player_board,
     @computer_board = Board.new
     @computer_cruiser = Ship.new("Cruiser", 3)
     @computer_submarine = Ship.new("Submarine", 2)
-    # start
   end
 
   def welcome_message
@@ -39,6 +41,7 @@ attr_reader :player_board,
       computer_shot
     end
     end_game_message
+    self.start
   end
 
   def end_game_message
@@ -50,6 +53,7 @@ attr_reader :player_board,
   end
 
 #-----------SETUP
+
   def computer_placement
     random_coordinates_cruiser
     random_coordinates_submarine
@@ -171,11 +175,13 @@ attr_reader :player_board,
   def player_won_game_message
     computer_ships_sunk?
     puts 'You won!'
+    puts "========================================"
   end
 
   def computer_won_game_message
     player_ships_sunk?
     puts 'I won!'
+    puts "========================================"
   end
 
   def player_ships_sunk?
