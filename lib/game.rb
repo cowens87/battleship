@@ -146,10 +146,6 @@ attr_reader :player_board,
     result_type_computer(@player_board.cells[shuffled])
   end
 
-  def already_fired_upon?(cell)
-    cell.fired_upon?
-  end
-
   def player_won_game_message
     computer_ships_sunk?
     puts 'You won!'
