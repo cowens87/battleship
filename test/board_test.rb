@@ -65,7 +65,6 @@ class BoardTest < Minitest::Test
     submarine = Ship.new("Submarine", 2)
 
     assert_equal true, board.valid_placement?(submarine, ["A1", "A2"])
-
     assert_equal true, board.valid_placement?(cruiser, ["B1", "C1", "D1"])
   end
 
@@ -133,7 +132,7 @@ class BoardTest < Minitest::Test
     expected2 = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
 
     board.place(cruiser, ["A1", "A2", "A3"])
-
+    
     assert_equal expected1, board.render
     assert_equal expected2, board.render(true)
   end
@@ -144,7 +143,6 @@ class BoardTest < Minitest::Test
     expected1 = "  1 2 3 4 \nA S H H . \nB . . . . \nC . . . . \nD . . . . \n"
 
     board.place(cruiser, ["A1", "A2", "A3"])
-
     board.cells["A3"].fire_upon
     board.cells["A2"].fire_upon
 
@@ -157,7 +155,6 @@ class BoardTest < Minitest::Test
     expected1 = "  1 2 3 4 \nA X X X . \nB . . . . \nC . . . . \nD . . . . \n"
 
     board.place(cruiser, ["A1", "A2", "A3"])
-
     board.cells["A3"].fire_upon
     board.cells["A2"].fire_upon
     board.cells["A1"].fire_upon
@@ -171,7 +168,6 @@ class BoardTest < Minitest::Test
     expected1 = "  1 2 3 4 \nA S S S M \nB . . . . \nC . . . . \nD . . . . \n"
 
     board.place(cruiser, ["A1", "A2", "A3"])
-
     board.cells["A4"].fire_upon
 
     assert_equal expected1, board.render(true)
