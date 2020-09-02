@@ -84,5 +84,25 @@ class GameTest < Minitest::Test
     assert_equal true, game.computer_ships_sunk?
   end
 
+  def test_game_over
+    game = Game.new
 
+    game.computer_board.place(game.computer_cruiser, ["A1", "A2", "A3"])
+
+    game.computer_board.place(game.computer_submarine, ["B2", "B3"])
+
+    assert_equal false, game.game_over?
+
+    game.computer_board.cells["A1"].fire_upon
+
+    game.computer_board.cells["A2"].fire_upon
+
+    game.computer_board.cells["A3"].fire_upon
+
+    game.computer_board.cells["B2"].fire_upon
+
+    game.computer_board.cells["B3"].fire_upon
+
+    assert_equal true, game.game_over?
+  end
 end
