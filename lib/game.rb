@@ -12,7 +12,7 @@ attr_reader :player_board,
     @computer_board = Board.new
     @computer_cruiser = Ship.new("Cruiser", 3)
     @computer_submarine = Ship.new("Submarine", 2)
-    start
+    # start
   end
 
   def welcome_message
@@ -78,6 +78,7 @@ attr_reader :player_board,
     user_input = gets.chomp.upcase.split(" ")
       until @player_board.valid_placement?(@player_cruiser, user_input)
         invalid_coord_prompt
+        user_input = gets.chomp.upcase.split(" ")
       end
       @player_board.place(@player_cruiser, user_input)
     render_player_board
@@ -85,6 +86,7 @@ attr_reader :player_board,
     user_input = gets.chomp.upcase.split(" ")
       until @player_board.valid_placement?(@player_submarine, user_input)
         invalid_coord_prompt
+        user_input = gets.chomp.upcase.split(" ")
       end
       @player_board.place(@player_submarine, user_input)
   end
@@ -101,7 +103,6 @@ attr_reader :player_board,
 
   def submarine_prompt
     puts 'Enter the squares, without commas, for the Submarine (2 spaces):'
-    user_input
   end
 
   def invalid_coord_prompt
