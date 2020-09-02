@@ -38,6 +38,10 @@ attr_reader :player_board,
       player_shot
       computer_shot
     end
+    end_game_message
+  end
+
+  def end_game_message
     if player_ships_sunk?
       computer_won_game_message
     else
@@ -68,27 +72,45 @@ attr_reader :player_board,
   end
 
   def player_ship_placement
-    puts 'I have laid out my ships on the grid.'
-    puts 'You now need to lay out your two ships.'
-    puts 'The Cruiser is three units long and the Submarine is two units long.'
-    puts @player_board.render
-
-    puts 'Enter the squares, without commas, for the Cruiser (3 spaces):'
+    turn_start_message
+    render_player_board
+    cruiser_prompt
     user_input = gets.chomp.upcase.split(" ")
       until @player_board.valid_placement?(@player_cruiser, user_input)
-        puts 'Those are invalid coordinates. Please try again:'
+        invalid_coord_prompt
         user_input = gets.chomp.upcase.split(" ")
       end
       @player_board.place(@player_cruiser, user_input)
-    puts @player_board.render(true)
-
-    puts 'Enter the squares, without commas, for the Submarine (2 spaces):'
+    render_player_board
+    submarine_prompt
     user_input = gets.chomp.upcase.split(" ")
-        until @player_board.valid_placement?(@player_submarine, user_input)
-          puts 'Those are invalid coordinates. Please try again:'
-          user_input = gets.chomp.upcase.split(" ")
-        end
+      until @player_board.valid_placement?(@player_submarine, user_input)
+        invalid_coord_prompt
+        user_input = gets.chomp.upcase.split(" ")
+      end
       @player_board.place(@player_submarine, user_input)
+  end
+
+  def turn_start_message
+    puts 'I have laid out my ships on the grid.'
+    puts 'You now need to lay out your two ships.'
+    puts 'The Cruiser is three units long and the Submarine is two units long.'
+  end
+
+  def cruiser_prompt
+    puts 'Enter the squares, without commas, for the Cruiser (3 spaces):'
+  end
+
+  def submarine_prompt
+    puts 'Enter the squares, without commas, for the Submarine (2 spaces):'
+  end
+
+  def invalid_coord_prompt
+    puts 'Those are invalid coordinates. Please try again:'
+  end
+
+  def render_player_board
+    puts @player_board.render(true)
   end
 
 #-----------TURN
@@ -97,7 +119,7 @@ attr_reader :player_board,
     puts "=============COMPUTER BOARD============="
     puts @computer_board.render
     puts "==============PLAYER BOARD=============="
-    puts @player_board.render(true)
+    render_player_board
   end
 
   def result_type_player(cell)
