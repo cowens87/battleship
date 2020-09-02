@@ -1,10 +1,13 @@
 class Game
-attr_reader :player_board,
-            :player_cruiser,
-            :player_submarine,
-            :computer_board,
-            :computer_cruiser,
-            :computer_submarine
+  require './lib/board.rb'
+  require './lib/cell.rb'
+  require './lib/ship.rb'
+  attr_reader :player_board,
+              :player_cruiser,
+              :player_submarine,
+              :computer_board,
+              :computer_cruiser,
+              :computer_submarine
   def initialize
     @player_board = Board.new
     @player_cruiser = Ship.new("Cruiser", 3)
@@ -12,7 +15,6 @@ attr_reader :player_board,
     @computer_board = Board.new
     @computer_cruiser = Ship.new("Cruiser", 3)
     @computer_submarine = Ship.new("Submarine", 2)
-    # start
   end
 
   def welcome_message
